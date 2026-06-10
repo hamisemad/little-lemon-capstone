@@ -1,34 +1,46 @@
+import logo2 from "../images/logo2.png";
+
 function Footer() {
   return (
     <footer>
-      <section>
-        <h3>Little Lemon</h3>
-      </section>
+      <div>
+        <img
+          src={logo2}
+          alt="Little Lemon Logo"
+          className="footer-logo"
+        />
+      </div>
 
-      <section>
-        <h3>Navigation</h3>
+      <div>
+        <h4>Navigation</h4>
+
         <ul>
           <li>Home</li>
           <li>About</li>
           <li>Menu</li>
           <li>Reservations</li>
         </ul>
-      </section>
+      </div>
 
-      <section>
-        <h3>Contact</h3>
-        <p>Chicago</p>
-        <p>+1 555 555 555</p>
-      </section>
+      <div>
+        <h4>Contact</h4>
 
-      <section>
-        <h3>Social Media</h3>
+        <ul>
+          <li>Chicago, Illinois</li>
+          <li>+1 555 123 4567</li>
+          <li>info@littlelemon.com</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Social Media</h4>
+
         <ul>
           <li>Facebook</li>
           <li>Instagram</li>
           <li>X</li>
         </ul>
-      </section>
+      </div>
     </footer>
   );
 }

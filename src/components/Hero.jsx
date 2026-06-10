@@ -1,22 +1,28 @@
+import heroImage from "../images/hero-image.png";
+import "./Hero.css";
+
 function Hero() {
   return (
     <section className="hero">
-      <div>
+      <div className="hero-content">
         <h1>Little Lemon</h1>
-        <p>Chicago</p>
+
+        <h2>Chicago</h2>
 
         <p>
           We are a family-owned Mediterranean restaurant,
           focused on traditional recipes served with a modern twist.
         </p>
 
-        <button>Reserve a Table</button>
+        <button aria-label="Reserve a Table">
+          Reserve a Table
+        </button>
       </div>
 
-      <div>
+      <div className="hero-image">
         <img
-          src="https://placehold.co/300x300"
-          alt="Restaurant food"
+          src={heroImage}
+          alt="Little Lemon signature dish"
         />
       </div>
     </section>

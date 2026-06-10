@@ -1,10 +1,12 @@
 import Nav from "./Nav";
+import logo from "../images/little-lemon-logo.png";
 
 function Header() {
   return (
-    <header>
+    <header className="header">
       <img
-        src="https://placehold.co/200x60?text=Little+Lemon"
+        className="logo"
+        src={logo}
         alt="Little Lemon Logo"
       />
 
