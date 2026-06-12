@@ -1,0 +1,125 @@
+.booking-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.booking-page h1 {
+  color: #495e57;
+  margin-bottom: 1rem;
+}
+
+.booking-page p {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.booking-form {
+  display: grid;
+  gap: 1rem;
+
+  max-width: 500px;
+  margin: 0 auto;
+
+  padding: 2rem;
+
+  background-color: #edefee;
+
+  border-radius: 16px;
+}
+
+.booking-form label {
+  text-align: left;
+  font-weight: bold;
+  color: #495e57;
+}
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+
+  padding: 0.8rem;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  font-size: 1rem;
+}
+
+.booking-form button {
+  background-color: #f4ce14;
+  color: black;
+
+  border: none;
+
+  padding: 1rem;
+
+  border-radius: 12px;
+
+  font-weight: bold;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  margin-top: 1rem;
+  width: 100%;
+  justify-self: center;
+}
+
+.booking-form button:hover {
+  opacity: 0.9;
+}
+
+.confirmation-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; 
+  padding: 2rem;
+  background-color: #f9f9f9; 
+}
+
+.confirmation-card {
+  background-color: white;
+
+  max-width: 650px;
+  width: 100%;
+
+  padding: 3rem 2rem;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+
+.confirmation-card table {
+  width: 100%;
+  margin-top: 2rem;
+
+  border-collapse: collapse;
+
+  text-align: center;
+}
+
+.confirmation-card th,
+.confirmation-card td {
+  padding: 1rem;
+
+  border-bottom: 1px solid #eee;
+
+  font-size: 1rem;
+}
+
+.confirmation-card h1 {
+  color: #495e57;
+  margin-bottom: 1rem;
+}
+
+.confirmation-card p {
+  color: #333;
+  line-height: 1.6;
+}
