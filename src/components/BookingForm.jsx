@@ -9,16 +9,25 @@ function BookingForm({ availableTimes, dispatch, submitForm,
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
 
+  const isFormValid = date &&
+    time &&
+    guests <= 10 &&
+    guests >= 1 &&
+    occasion;
+
+
   function handleSubmit(e) {
     e.preventDefault();
+    if (!isFormValid) return;
 
     submitForm({
-        date,
-        time,
-        guests,
-        occasion,
-      });
+      date,
+      time,
+      guests,
+      occasion,
+    });
   }
+
 
 
   return (
@@ -27,6 +36,8 @@ function BookingForm({ availableTimes, dispatch, submitForm,
       <label htmlFor="res-date">Choose a date:</label>
       <input type="date"
         id="res-date"
+        aria-label="Reservation Date"
+        required
         value={date}
         onChange={(e) => {
           setDate(e.target.value);
@@ -43,6 +54,8 @@ function BookingForm({ availableTimes, dispatch, submitForm,
       <select
         id="res-time"
         value={time}
+        required
+        aria-label="Reservation Time"
         onChange={(e) => setTime(e.target.value)}
       >
         {availableTimes.map((availableTime) => (
@@ -60,6 +73,8 @@ function BookingForm({ availableTimes, dispatch, submitForm,
         id="guests"
         min="1"
         max="10"
+        required
+        aria-label="Number of Guests"
         value={guests}
         onChange={(e) => setGuests(e.target.value)}
       />
@@ -68,6 +83,8 @@ function BookingForm({ availableTimes, dispatch, submitForm,
       </label>
       <select
         id="occasion"
+        required
+        aria-label="Occasion"
         value={occasion}
         onChange={(e) => setOccasion(e.target.value)}
       >
@@ -77,8 +94,8 @@ function BookingForm({ availableTimes, dispatch, submitForm,
       </select>
 
 
-      <button type="submit">
-        Make Your Reservation
+      <button type="submit" disabled={!isFormValid} aria-label="On Click">
+        Confirm Reservation
       </button>
 
 
