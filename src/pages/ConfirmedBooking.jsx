@@ -22,6 +22,7 @@ function ConfirmedBooking() {
         <h1>Booking Confirmed!</h1>
 
         <table>
+            <caption>Your Reservation Details</caption>
           <thead>
             <tr>
               <th>Date</th>

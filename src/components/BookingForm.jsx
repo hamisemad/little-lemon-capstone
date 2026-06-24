@@ -1,73 +1,80 @@
 import { useState } from "react";
 import "./BookingForm.css";
 
-
-function BookingForm({ availableTimes, dispatch, submitForm,
-}) {
+function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [date, setDate] = useState("");
-  const [time, setTime] = useState("17:00");
+  const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
+  
+  const [touchedTime, setTouchedTime] = useState(false);
 
-  const isFormValid = date &&
-    time &&
-    guests <= 10 &&
-    guests >= 1 &&
-    occasion;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
+  const selectedDate = date ? new Date(date) : null;
+  const isDateValid = selectedDate && selectedDate >= today;
+  const isGuestsValid = guests >= 1 && guests <= 10;
+  const isTimeValid = time !== "";
+
+  const isFormValid = isDateValid && isTimeValid && isGuestsValid && occasion;
 
   function handleSubmit(e) {
     e.preventDefault();
+
     if (!isFormValid) return;
 
-    submitForm({
-      date,
-      time,
-      guests,
-      occasion,
-    });
+    submitForm({ date, time, guests, occasion });
   }
-
-
 
   return (
     <form onSubmit={handleSubmit} className="booking-form">
-
+      {/* Date Field */}
       <label htmlFor="res-date">Choose a date:</label>
-      <input type="date"
+      <input
+        type="date"
         id="res-date"
-        aria-label="Reservation Date"
         required
+        aria-label="Reservation Date"
+        min={new Date().toISOString().split("T")[0]}
         value={date}
         onChange={(e) => {
-          setDate(e.target.value);
+          const newDate = e.target.value;
+          setDate(newDate);
+          dispatch({ type: "DATE_CHANGED", date: newDate });
+        }}
+      />
+      {date && !isDateValid && (
+        <p className="error-message">Please select today or a future date.</p>
+      )}
 
-          dispatch({
-            type: "DATE_CHANGED",
-            date: e.target.value,
-          });
-
-        }} />
-      <label htmlFor="res-time">
-        Choose time
-      </label>
+      {/* Time Field */}
+      <label htmlFor="res-time">Choose time</label>
       <select
         id="res-time"
-        value={time}
         required
         aria-label="Reservation Time"
-        onChange={(e) => setTime(e.target.value)}
+        value={time}
+        onChange={(e) => {
+          setTime(e.target.value);
+          setTouchedTime(true);
+        }}
+        onBlur={() => setTouchedTime(true)}
       >
+        <option value="">Select a time</option>
         {availableTimes.map((availableTime) => (
-          <option key={availableTime} value={availableTime} >
+          <option key={availableTime} value={availableTime}>
             {availableTime}
           </option>
         ))}
       </select>
-      <label htmlFor="guests">
-        Number of guests
-      </label>
+      {/* Only show this if they actually touched the dropdown and left it blank */}
+      {touchedTime && !isTimeValid && (
+        <p className="error-message">Please select a reservation time.</p>
+      )}
 
+      {/* Guests Field */}
+      <label htmlFor="guests">Number of guests</label>
       <input
         type="number"
         id="guests"
@@ -76,11 +83,14 @@ function BookingForm({ availableTimes, dispatch, submitForm,
         required
         aria-label="Number of Guests"
         value={guests}
-        onChange={(e) => setGuests(e.target.value)}
+        onChange={(e) => setGuests(Number(e.target.value))}
       />
-      <label htmlFor="occasion">
-        Occasion
-      </label>
+      {!isGuestsValid && (
+        <p className="error-message">Number of guests must be between 1 and 10.</p>
+      )}
+
+      {/* Occasion Field */}
+      <label htmlFor="occasion">Occasion</label>
       <select
         id="occasion"
         required
@@ -93,14 +103,12 @@ function BookingForm({ availableTimes, dispatch, submitForm,
         <option value="Business">Business</option>
       </select>
 
-
-      <button type="submit" disabled={!isFormValid} aria-label="On Click">
+      {/* REMOVED disabled={!isFormValid} so native HTML validation triggers */}
+      <button type="submit" aria-label="Confirm Reservation">
         Confirm Reservation
       </button>
-
-
     </form>
-  )
+  );
 }
 
 export default BookingForm;

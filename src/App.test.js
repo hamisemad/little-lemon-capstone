@@ -137,6 +137,7 @@ expect(guestInput).toHaveAttribute("min", "1");
 expect(guestInput).toHaveAttribute("max", "10");
 });
 
+
 test("occasion select is required", () => {
 render(
 <BookingForm
@@ -153,16 +154,21 @@ const occasionSelect = screen.getByLabelText(
 expect(occasionSelect).toHaveAttribute("required");
 });
 
-test("submit button is disabled when form is invalid", () => {
-render(
-<BookingForm
-availableTimes={["17:00", "18:00"]}
-dispatch={() => {}}
-submitForm={() => {}}
-/>
-);
 
-const submitButton = screen.getByRole("button");
+test("does not submit the form when inputs are invalid", () => {
+  const mockSubmitForm = jest.fn();
 
-expect(submitButton).toBeDisabled();
-});
+  render(
+    <BookingForm
+      availableTimes={["17:00", "18:00"]}
+      dispatch={() => {}}
+      submitForm={mockSubmitForm}
+    />
+  );
+
+  const submitButton = screen.getByRole("button", { name: /Confirm Reservation/i });
+  
+  submitButton.click();
+
+  expect(mockSubmitForm).not.toHaveBeenCalled();
+})

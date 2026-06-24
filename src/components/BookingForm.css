@@ -16,17 +16,22 @@
 }
 
 .booking-form {
-  display: grid;
-  gap: 1rem;
 
   max-width: 500px;
   margin: 0 auto;
-
   padding: 2rem;
-
   background-color: #edefee;
-
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+p.error-message {
+  color: #dc3545 !important;
+  font-size: 0.85rem;
+  margin: -5px 0 5px 0;
+  font-weight: bold;
 }
 
 .booking-form label {
@@ -142,3 +147,4 @@
     padding: 0.75rem;
   }
 }
+

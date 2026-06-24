@@ -1,15 +1,33 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Nav() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/">About</Link></li>
-        <li><Link to="/">Menu</Link></li>
-        <li><Link to="/reservations">Reservations</Link></li>
-        <li><Link to="/">Order Online</Link></li>
-        <li><Link to="/">Login</Link></li>
+      <button
+        className="menu-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle Navigation Menu"
+      >
+        ☰
+      </button>
+
+      {isOpen && (
+        <div
+          className="overlay"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      <ul className={isOpen ? "nav-links active" : "nav-links"}>
+        <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
+        <li><Link to="/" onClick={() => setIsOpen(false)}>About</Link></li>
+        <li><Link to="/" onClick={() => setIsOpen(false)}>Menu</Link></li>
+        <li><Link to="/reservations" onClick={() => setIsOpen(false)}>Reservations</Link></li>
+        <li><Link to="/" onClick={() => setIsOpen(false)}>Order Online</Link></li>
+        <li><Link to="/" onClick={() => setIsOpen(false)}>Login</Link></li>
       </ul>
     </nav>
   );
