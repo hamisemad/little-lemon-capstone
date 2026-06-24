@@ -68,7 +68,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
           </option>
         ))}
       </select>
-      {/* Only show this if they actually touched the dropdown and left it blank */}
+  
       {touchedTime && !isTimeValid && (
         <p className="error-message">Please select a reservation time.</p>
       )}
@@ -103,7 +103,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
         <option value="Business">Business</option>
       </select>
 
-      {/* REMOVED disabled={!isFormValid} so native HTML validation triggers */}
+    
       <button type="submit" aria-label="Confirm Reservation">
         Confirm Reservation
       </button>
